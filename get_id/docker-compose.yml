@@ -1,0 +1,19 @@
+version: '3'
+services:
+    get_id:
+        build: .
+        environment:
+            - USER
+        volumes:
+            - .:/home/get_id
+            - /etc/group:/etc/group:ro
+            - /etc/passwd:/etc/passwd:ro
+        tty: true
+
+    set_id:
+        build: .
+        depends_on:
+            - get_id
+        volumes:
+            - .:/home/get_id
+        tty: true
